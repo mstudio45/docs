@@ -1,4 +1,5 @@
 # Mintlify Starter Kit
+git add . && git commit -m "Hello World" && git push
 
 Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
 
