@@ -1,0 +1,322 @@
+---
+title: 'Functions'
+---
+
+## Types
+<AccordionGroup>
+  <Accordion title="TracerTable">
+    <ParamField path="Enabled" type="boolean" required default="false">
+        If `Enabled` is `false`, the tracer will not create.
+    </ParamField>
+
+    <ParamField path="Model" type="Instance" required>
+        Any instance that will be used for the Tracer.
+    </ParamField>
+    <ParamField path="MaxDistance" type="number" default="5000">
+        If player is `MaxDistance` studs away from the `Model` the Tracer will hide.
+    </ParamField>
+    <ParamField path="From" type="string" default="Bottom" required>
+        Tracer starting position.
+        Types: `Top`, `Center`, `Bottom`, `Mouse`
+    </ParamField>
+    <ParamField path="Color" type="Color3" required>
+        The color used for the Tracer.
+    </ParamField>
+    <ParamField path="Thickness" type="number" default="2">
+        Thickness of the Tracer line.
+    </ParamField>
+    <ParamField path="Transparency" type="number" default="0.65">
+        Transparency of the Tracer line.
+    </ParamField>
+  </Accordion>
+</AccordionGroup>
+
+## General
+
+### ESP.Clear
+Clears every ESP.
+```lua
+ESPLibrary.ESP.Clear()
+```
+
+<AccordionGroup>
+  <Accordion title="ESP.Billboard">
+    <ParamField path="Name" type="string">
+        The name that will be used in the `TextLabel`.
+    </ParamField>
+    <ParamField path="Model" type="Instance" required>
+        Any instance that will be used for the `Billboard`.
+    </ParamField>
+    <ParamField path="MaxDistance" type="number" default="5000">
+        If player is `MaxDistance` studs away from the `Model` the Billboard will hide.
+    </ParamField>
+    <ParamField path="Color" type="Color3" required>
+        The `color` used for the `Billboard`.
+    </ParamField>
+    <ParamField path="Tracer" type="TracerTable"></ParamField>
+
+    ```lua
+    local Billboard = ESPLibrary.ESP.Billboard({
+        Name = game.Players.LocalPlayer.Name, 
+        Model = game.Players.LocalPlayer.Character,
+
+        MaxDistance = 1000,
+        Color = BrickColor.random().Color
+    })
+    ```
+
+    If you want to change the settings of the element use this function (only some setting variables work):
+    <ResponseField name="Update" type="function">
+        ```lua
+        Billboard.Update({
+            Color = BrickColor.random().Color,
+            MaxDistance = 1000
+        })
+        ```
+    </ResponseField>
+  </Accordion>
+
+  <Accordion title="ESP.Tracer">
+    Same arguments as `TracerType`.
+    ```lua
+    local Tracer = ESPLibrary.ESP.Tracer({
+		Model = game.Players.LocalPlayer.Character,
+        MaxDistance = 5000,
+		From = "Bottom",
+		Color = BrickColor.random().Color
+	})
+    ```
+
+    If you want to change the settings of the element use this function (only some setting variables work):
+    <ResponseField name="Update" type="function">
+        ```lua
+        Tracer.Update({
+            Color = BrickColor.random().Color,
+            From = "Top",
+
+            Thickness = 2,
+            Transparency = 0.5,
+
+            MaxDistance = 1000
+        })
+        ```
+    </ResponseField>
+  </Accordion>
+
+  <Accordion title="ESP.Highlight">
+    <ParamField path="Name" type="string">
+        The name that will be used in the `Billboard's TextLabel`.
+    </ParamField>
+    <ParamField path="Model" type="Instance" required>
+        Any instance that will be used for the `Billboard`.
+    </ParamField>
+    <ParamField path="MaxDistance" type="number" default="5000">
+        If player is `MaxDistance` studs away from the `Model` the Billboard will hide.
+    </ParamField>
+
+    <ParamField path="FillColor" type="Color3" required>
+        The `fill color` used for the `Highlight`.
+    </ParamField>
+    <ParamField path="OutlineColor" type="Color3" required>
+        The `outline color` used for the `Highlight`.
+    </ParamField>
+    <ParamField path="TextColor" type="Color3" required>
+        The `text color` used for the `Billboard`.
+    </ParamField>
+
+    <ParamField path="FillTransparency" type="number" default="0.65">
+        The transparency of the `fill color`.
+    </ParamField>
+        <ParamField path="OutlineTransparency" type="number" default="0">
+        The transparency of the `outline`.
+    </ParamField>
+
+    <ParamField path="Tracer" type="TracerTable"></ParamField>
+
+    ```lua
+    local Color = BrickColor.random().Color
+    local Highlight = ESPLibrary.ESP.Highlight({
+		Name = game.Players.LocalPlayer.Name, 
+		Model = game.Players.LocalPlayer.Character,
+        MaxDistance = 5000,
+
+		FillColor = Color,
+		OutlineColor = Color,
+		TextColor = Color
+	})
+    ```
+
+    If you want to change the settings of the element use this function (only some setting variables work):
+    <ResponseField name="Update" type="function">
+        ```lua
+        local Color = BrickColor.random().Color
+        Highlight.Update({
+            FillColor = Color,
+            OutlineColor = Color,
+            TextColor = Color,
+
+            MaxDistance = 1000
+        })
+        ```
+    </ResponseField>
+  </Accordion>
+
+  <Accordion title="ESP.Adornment">
+    <ParamField path="Name" type="string">
+        The name that will be used in the `Billboard's TextLabel`.
+    </ParamField>
+    <ParamField path="Model" type="Instance" required>
+        Any instance that will be used for the `Billboard`.
+    </ParamField>
+    <ParamField path="MaxDistance" type="number" default="5000">
+        If player is `MaxDistance` studs away from the `Model` the Billboard will hide.
+    </ParamField>
+
+    <ParamField path="Color" type="Color3" required>
+        The `color` used for the `Adornment`.
+    </ParamField>
+    <ParamField path="TextColor" type="Color3" required>
+        The `text color` used for the `Billboard`.
+    </ParamField>
+
+    <ParamField path="Transparency" type="number" default="0.65">
+        The transparency of the `Adornment`.
+    </ParamField>
+
+    <ParamField path="Type" type="string" default="Box">
+        `Adornment` type.
+        Types: `Box`, `Cylinder`, `Sphere`
+    </ParamField>
+
+    <ParamField path="Tracer" type="TracerTable"></ParamField>
+
+    ```lua
+    local Color = BrickColor.random().Color
+    local Adornment = ESPLibrary.ESP.Adornment({
+		Name = game.Players.LocalPlayer.Name, 
+		Model = game.Players.LocalPlayer.Character,
+        MaxDistance = 5000,
+
+		Color = Color,
+		TextColor = Color,
+
+		Type = "Box"
+	})
+    ```
+
+    If you want to change the settings of the element use this function (only some setting variables work):
+    <ResponseField name="Update" type="function">
+        ```lua
+        local Color = BrickColor.random().Color
+        Adornment.Update({
+            Color = Color,
+            TextColor = Color,
+
+            MaxDistance = 1000
+        })
+        ```
+    </ResponseField>
+  </Accordion>
+
+  <Accordion title="ESP.Outline">
+    <ParamField path="Name" type="string">
+        The name that will be used in the `Billboard's TextLabel`.
+    </ParamField>
+    <ParamField path="Model" type="Instance" required>
+        Any instance that will be used for the `Billboard`.
+    </ParamField>
+    <ParamField path="MaxDistance" type="number" default="5000">
+        If player is `MaxDistance` studs away from the `Model` the Billboard will hide.
+    </ParamField>
+
+    <ParamField path="SurfaceColor" type="Color3" required>
+        The `surface color` used for the `Outline`.
+    </ParamField>
+     <ParamField path="BorderColor" type="Color3" required>
+        The `border color` used for the `Outline`.
+    </ParamField>
+    <ParamField path="TextColor" type="Color3" required>
+        The `text color` used for the `Billboard`.
+    </ParamField>
+
+    <ParamField path="Thickness" type="number" default="0.04">
+        The thickness of the `Outline`.
+    </ParamField>
+    <ParamField path="Transparency" type="number" default="0.65">
+        The transparency of the `Adornment`.
+    </ParamField>
+
+    <ParamField path="Tracer" type="TracerTable"></ParamField>
+
+    ```lua
+    local Color = BrickColor.random().Color
+    local Outline = ESPLibrary.ESP.Outline({
+		Name = game.Players.LocalPlayer.Name, 
+		Model = game.Players.LocalPlayer.Character,
+        MaxDistance = 5000,
+
+		SurfaceColor = Color,
+		BorderColor = Color,
+		TextColor = Color
+	})
+    ```
+
+    If you want to change the settings of the element use this function (only some setting variables work):
+    <ResponseField name="Update" type="function">
+        ```lua
+        local Color = BrickColor.random().Color
+        Outline.Update({
+            SurfaceColor = Color,
+            BorderColor = Color,
+            TextColor = Color,
+
+            Thickness = 2,
+            Transparency = 0.5,
+
+            MaxDistance = 1000
+        })
+        ```
+    </ResponseField>
+  </Accordion>
+</AccordionGroup>
+
+### Response
+All ESP Functions have a same (or very simillar) return value.
+<AccordionGroup>
+    <Accordion title="Deleted">
+        <ResponseField name="Deleted" type="boolean">
+            Indicates if the ESP element is deleted.
+        </ResponseField>
+    </Accordion>
+
+    <Accordion title="Destroy">
+        <ResponseField name="Destroy" type="function">
+            Deletes the ESP element.
+            ```lua
+            ESPElement.Destroy() -- You can also use ESPElement.Delete()
+            ```
+        </ResponseField>
+    </Accordion>
+
+    <Accordion title="SetText">
+        <ResponseField name="SetText" type="function">
+            <ParamField path="Name" type="string" required></ParamField>
+
+            Changes the Billboard Text.
+            ```lua
+            ESPElement.SetText("New Name")
+            ```
+        </ResponseField>
+    </Accordion>
+
+    <Accordion title="SetVisible">
+        <ResponseField name="SetVisible" type="function">
+            <ParamField path="Visible" type="boolean" required></ParamField>
+
+            Changes the visibility of the ESP element.
+            ```lua
+            ESPElement.SetVisible(false)
+            ```
+        </ResponseField>
+    </Accordion>
+</AccordionGroup>

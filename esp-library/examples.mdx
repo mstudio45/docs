@@ -1,0 +1,40 @@
+---
+title: 'Examples'
+---
+
+```lua player_esp.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MS-ESP/refs/heads/main/source.lua"))()
+local Players = game:GetService("Players")
+
+-- Handler
+function playerAdded(player)
+    if player == Players.LocalPlayer then return end
+    local Highlight;
+    local Color = BrickColor.random().Color
+
+    local function onCharAdded(character)
+        character:WaitForChild("HumanoidRootPart", math.huge)
+
+        Highlight = ESPLibrary.ESP.Highlight({
+            Name = player.Name, 
+            Model = character,
+
+            FillColor = Color,
+            OutlineColor = Color,
+            TextColor = Color,
+
+            -- ↓ Optional ↓ --
+            Tracer = { 
+                Enabled = true,
+                Color = color
+            }
+        })
+    end
+
+    onCharAdded(player.Character or player.CharacterAdded:Wait())
+    player.CharacterAdded:Connect(onCharAdded)
+end
+
+for _, player in pairs(Players:GetPlayers()) do playerAdded(player) end
+Players.PlayerAdded:Connect(playerAdded)
+```

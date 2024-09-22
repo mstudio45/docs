@@ -1,19 +1,15 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "mstudio45's Scripts",
+  "name": "mstudio45's scripts",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "https://mstudio45.com/favicon.ico",
+    "light": "https://mstudio45.com/favicon.ico"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "favicon.png",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
-    "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
-    }
+    "primary": "#fa4141",
+    "light": "#f77474",
+    "dark": "#e03434"
   },
   "tabs": [
     {
@@ -31,11 +27,16 @@
     {
       "group": "ESP Library",
       "pages": [
-        "esp-library/home"
+        "esp-library/home",
+        "esp-library/functions",
+        "esp-library/library-functions",
+        "esp-library/misc-functions",
+        "esp-library/examples"
       ]
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/mstudio45"
+    "github": "https://github.com/mstudio45",
+    "discord": "https://discord.com/users/1098248637789786165"
   }
 }

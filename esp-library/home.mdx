@@ -1,0 +1,20 @@
+---
+title: 'Setup'
+---
+
+## Loadstring
+
+<Info>Tracers require `Drawing` library.</Info>
+```lua esp_lib.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MS-ESP/refs/heads/main/source.lua"))()
+```
+
+After the ESP loads you can also access it like this:
+```lua global_esp.lua
+local getgenvFunc = typeof(getgenv) == "table" and getgenv;
+local global = function() return getgenvFunc and getgenvFunc() or _G end;
+
+global().mstudio45.ESPLibrary 
+-- ↑ This how you can access it without using the loadstring again
+-- If you use the loadstring again it will work.
+```
