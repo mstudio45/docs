@@ -11,7 +11,7 @@ local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/ms
 
 After the ESP loads you can also access it like this:
 ```lua global_esp.lua
-local getgenvFunc = typeof(getgenv) == "table" and getgenv;
+local getgenvFunc = typeof(getgenv) == "function" and getgenv;
 local global = function() return getgenvFunc and getgenvFunc() or _G end;
 
 global().mstudio45.ESPLibrary 
