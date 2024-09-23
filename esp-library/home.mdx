@@ -2,10 +2,7 @@
 title: 'Home'
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/esp_design.png"
-/>
+![ESP Design](/images/esp_design.png)
 
 ## Loadstring
 
@@ -15,11 +12,6 @@ local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/ms
 ```
 
 After the ESP loads you can also access it like this:
-```lua global_esp.lua
-local getgenvFunc = typeof(getgenv) == "function" and getgenv;
-local global = function() return getgenvFunc and getgenvFunc() or _G end;
-
-global().mstudio45.ESPLibrary 
--- ↑ This how you can access it without using the loadstring again
--- If you use the loadstring again it will work.
+```lua esp_from_getgenv.lua
+getgenv().mstudio45.ESPLibrary
 ```
