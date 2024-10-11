@@ -29,6 +29,25 @@ title: 'Functions'
         Transparency of the Tracer line.
     </ParamField>
   </Accordion>
+
+  <Accordion title="ArrowTable">
+    <ParamField path="Enabled" type="boolean" default="false" required>
+        If `Enabled` is `false`, the tracer will not create.
+    </ParamField>
+
+    <ParamField path="Model" type="Instance" required>
+        Any instance that will be used for the Tracer.
+    </ParamField>
+    <ParamField path="MaxDistance" type="number" default="5000">
+        If player is `MaxDistance` studs away from the `Model` the Tracer will hide.
+    </ParamField>
+    <ParamField path="CenterOffset" type="number" default="300">
+        The offset from the center of the screen.
+    </ParamField>
+    <ParamField path="Color" type="Color3" required>
+        The color used for the Tracer.
+    </ParamField>
+  </Accordion>
 </AccordionGroup>
 
 ## General
@@ -53,7 +72,9 @@ ESPLibrary.ESP.Clear()
     <ParamField path="Color" type="Color3" required>
         The `color` used for the `Billboard`.
     </ParamField>
+
     <ParamField path="Tracer" type="TracerTable"></ParamField>
+	<ParamField path="Arrow" type="ArrowTable"></ParamField>
 
     ```lua
     local Billboard = ESPLibrary.ESP.Billboard({
@@ -132,6 +153,7 @@ ESPLibrary.ESP.Clear()
     </ParamField>
 
     <ParamField path="Tracer" type="TracerTable"></ParamField>
+	<ParamField path="Arrow" type="ArrowTable"></ParamField>
 
     ```lua
     local Color = BrickColor.random().Color
@@ -189,6 +211,7 @@ ESPLibrary.ESP.Clear()
     </ParamField>
 
     <ParamField path="Tracer" type="TracerTable"></ParamField>
+	<ParamField path="Arrow" type="ArrowTable"></ParamField>
 
     ```lua
     local Color = BrickColor.random().Color
@@ -247,6 +270,7 @@ ESPLibrary.ESP.Clear()
     </ParamField>
 
     <ParamField path="Tracer" type="TracerTable"></ParamField>
+	<ParamField path="Arrow" type="ArrowTable"></ParamField>
 
     ```lua
     local Color = BrickColor.random().Color
