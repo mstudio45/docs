@@ -2,7 +2,7 @@
 title: 'Functions'
 ---
 
-## Types
+## General Settings
 <AccordionGroup>
   <Accordion title="TracerTable">
     <ParamField path="Enabled" type="boolean" default="false" required>
@@ -95,7 +95,7 @@ ESPLibrary.ESP.Clear()
   </Accordion>
 
   <Accordion title="ESP.Tracer">
-    Same arguments as `TracerType`.
+    Same arguments as `TracerTable`.
     ```lua
     local Tracer = ESPLibrary.ESP.Tracer({
 		Model = game.Players.LocalPlayer.Character,
@@ -122,7 +122,7 @@ ESPLibrary.ESP.Clear()
   </Accordion>
 
   <Accordion title="ESP.Arrow">
-    Same arguments as `ArrowType`.
+    Same arguments as `ArrowTable`.
     ```lua
     local Arrow = ESPLibrary.ESP.Arrow({
 		Model = game.Players.LocalPlayer.Character,
