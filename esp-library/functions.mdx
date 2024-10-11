@@ -121,6 +121,28 @@ ESPLibrary.ESP.Clear()
     </ResponseField>
   </Accordion>
 
+  <Accordion title="ESP.Arrow">
+    Same arguments as `ArrowType`.
+    ```lua
+    	local Arrow = ESPLibrary.ESP.Arrow({
+		Model = game.Players.LocalPlayer.Character,
+        	MaxDistance = 5000,
+		CenterOffset = 300,
+		Color = BrickColor.random().Color
+	})
+    ```
+
+    If you want to change the settings of the element use this function (only some setting variables work):
+    <ResponseField name="Update" type="function">
+        ```lua
+        Arrow.Update({
+            Color = BrickColor.random().Color,
+            CenterOffset = 150
+        })
+        ```
+    </ResponseField>
+  </Accordion>
+
   <Accordion title="ESP.Highlight">
     <ParamField path="Name" type="string">
         The name that will be used in the `Billboard's TextLabel`.
