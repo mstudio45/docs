@@ -35,13 +35,6 @@ function playerAdded(player)
 
             Tracer = { 
                 Enabled = true,
-<<<<<<< Updated upstream
-                Color = Color
-            },
-            Arrow = { 
-                Enabled = true,
-                Color = Color
-=======
                 Color = RandomColor,
                 From = "Mouse"
             },
@@ -49,7 +42,6 @@ function playerAdded(player)
             Arrow = {
                 Enabled = true,
                 Color = RandomColor
->>>>>>> Stashed changes
             }
         })
     end
@@ -61,8 +53,6 @@ end
 for _, player in pairs(Players:GetPlayers()) do playerAdded(player) end
 Players.PlayerAdded:Connect(playerAdded)
 ```
-<<<<<<< Updated upstream
-=======
 
 ```lua part_esp.lua
 local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
@@ -99,4 +89,3 @@ end
 for _, part in pairs(workspace:GetDescendants()) do partAdded(part) end
 workspace.DescendantAdded:Connect(partAdded)
 ```
->>>>>>> Stashed changes
