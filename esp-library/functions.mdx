@@ -117,25 +117,6 @@ title: 'Functions'
         Function executed when the ESP is destroyed.
     </ParamField>
   </Accordion>
-
-  <Accordion title="ArrowTable">
-    <ParamField path="Enabled" type="boolean" default="false" required>
-        If `Enabled` is `false`, the tracer will not create.
-    </ParamField>
-
-    <ParamField path="Model" type="Instance" required>
-        Any instance that will be used for the Tracer.
-    </ParamField>
-    <ParamField path="MaxDistance" type="number" default="5000">
-        If player is `MaxDistance` studs away from the `Model` the Tracer will hide.
-    </ParamField>
-    <ParamField path="CenterOffset" type="number" default="300">
-        The offset from the center of the screen.
-    </ParamField>
-    <ParamField path="Color" type="Color3" required>
-        The color used for the Tracer.
-    </ParamField>
-  </Accordion>
 </AccordionGroup>
 
 ## General
@@ -197,7 +178,7 @@ All ESP Functions have a same return value.
     </Accordion>
 </AccordionGroup>
 
-## Updating current ESP
+### Updating current ESP
 To change any of the setting for the current ESP, edit the `CurrentSettings` table:
 <Note>Not every setting can be updated.</Note>
 
