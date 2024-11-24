@@ -1,0 +1,45 @@
+---
+title: 'Global Config'
+---
+
+<AccordionGroup>
+  <Accordion title="ESPLibrary.GlobalConfig">
+    <ParamField path="Rainbow" type="boolean" default="false">
+        If `true`, the rainbow effect will be enabled.
+    </ParamField>
+
+    <ParamField path="Billboards" type="boolean" default="true">
+        If `true`, the billboards will be enabled.
+    </ParamField>
+
+    <ParamField path="Distance" type="boolean" default="true">
+        If `true`, the distance text in billboards will be enabled.
+    </ParamField>
+
+    <ParamField path="Highlighters" type="boolean" default="true">
+        If `true`, the highlighters will be enabled.
+    </ParamField>
+
+    <ParamField path="Tracers" type="boolean"  default="true">
+        If `true`, the tracer will be enabled.
+    </ParamField>
+
+    <ParamField path="Arrows" type="boolean"  default="true">
+        If `true`, the arrow will be enabled.
+    </ParamField>
+
+    <ParamField path="Font" type="Enum.Font" default="Enum.Font.RobotoCondensed">
+        The font used for the text in the billboards.
+    </ParamField>
+  </Accordion>
+</AccordionGroup>
+
+To change any of the setting in the `ESPLibrary.GlobalConfig` table, use the following function:
+```lua
+ESPLibrary.GlobalConfig.< Setting Here > = < Value Here >
+```
+
+Example:
+```lua
+ESPLibrary.GlobalConfig.Rainbow = true
+```

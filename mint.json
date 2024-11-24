@@ -29,8 +29,7 @@
       "pages": [
         "esp-library/home",
         "esp-library/functions",
-        "esp-library/library-functions",
-        "esp-library/misc-functions",
+        "esp-library/global-config",
         "esp-library/examples"
       ]
     }

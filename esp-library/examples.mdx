@@ -3,34 +3,53 @@ title: 'Examples'
 ---
 
 ```lua player_esp.lua
-local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MS-ESP/refs/heads/main/source.lua"))()
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
 local Players = game:GetService("Players")
 
 -- Handler
 function playerAdded(player)
     if player == Players.LocalPlayer then return end
-    local Highlight;
-    local Color = BrickColor.random().Color
 
+    local ESPElement, RandomColor = nil, BrickColor.random().Color;
     local function onCharAdded(character)
         character:WaitForChild("HumanoidRootPart", math.huge)
 
-        Highlight = ESPLibrary.ESP.Highlight({
-            Name = player.Name, 
+        ESPElement = ESPLibrary:Add({
+            Name = player.Name,
+
             Model = character,
+            -- TextModel = character.Head, 
+            -- ↑ This would change the Billboard's Adornee to the Player's Head
 
-            FillColor = Color,
-            OutlineColor = Color,
-            TextColor = Color,
+            Color = RandomColor,
+            MaxDistance = 1000,
 
-            -- ↓ Optional ↓ --
+            TextSize = 17,
+
+            ESPType = "Highlight",
+            
+            FillColor = RandomColor,
+            OutlineColor = RandomColor,
+            FillTransparency = 0.5,
+            OutlineTransparency = 0,
+
             Tracer = { 
                 Enabled = true,
+<<<<<<< Updated upstream
                 Color = Color
             },
             Arrow = { 
                 Enabled = true,
                 Color = Color
+=======
+                Color = RandomColor,
+                From = "Mouse"
+            },
+
+            Arrow = {
+                Enabled = true,
+                Color = RandomColor
+>>>>>>> Stashed changes
             }
         })
     end
@@ -42,3 +61,42 @@ end
 for _, player in pairs(Players:GetPlayers()) do playerAdded(player) end
 Players.PlayerAdded:Connect(playerAdded)
 ```
+<<<<<<< Updated upstream
+=======
+
+```lua part_esp.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+
+local PartName = "Baseplate" -- change this to your part name
+local PartColor = BrickColor.random().Color;
+
+-- Handler
+function partAdded(part)
+    if part.Name ~= PartName then return end
+
+    ESPLibrary:Add({
+        Name = part.Name,
+
+        Model = part,
+
+        Color = PartColor,
+        MaxDistance = 1000,
+
+        TextSize = 17,
+
+        ESPType = "Highlight",
+        
+        FillColor = PartColor,
+        OutlineColor = PartColor,
+
+        Tracer = { 
+            Enabled = true,
+            Color = PartColor
+        }
+    })
+end
+
+for _, part in pairs(workspace:GetDescendants()) do partAdded(part) end
+workspace.DescendantAdded:Connect(partAdded)
+```
+>>>>>>> Stashed changes

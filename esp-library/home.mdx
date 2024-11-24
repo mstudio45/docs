@@ -4,10 +4,11 @@ title: 'Home'
 
 ![ESP Design](/images/esp_design.png)
 
-## Loadstring
+<Note>Fun Fact: This ESP Library is used inside [mspaint](https://mspaint.cc/)!</Note>
 
-<Info>Tracers require `Drawing` library.</Info>
+## Loadstring
 ```lua esp_lib.lua
+<<<<<<< Updated upstream
 local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.lua"))()
 ```
 
@@ -18,3 +19,38 @@ getgenv().mstudio45.ESPLibrary
 
 ## Source Code
 This ESP Library is `open source` at https://github.com/mstudio45/MSESP.
+=======
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+
+-- After the ESP Library is loaded, you can access it using the following code:
+getgenv().mstudio45_ESP
+```
+
+## Changelogs
+```diff
+[ v2 - 24.11.2024 ]
+-- A lot has been changed in this version. --
+-- Please read the documentation for more information. --
+
++ Fully rewritten library.
++ Switched to Path2D for tracers.
++ Huge optimizations.
+
+[ Library Changes ]
++ ESPLibrary.< Global Setting >.Set/Enable/Disable/Toggle => ESPLibrary.GlobalConfig
+- getgenv().mstudio45.ESPLibrary => getgenv().mstudio45_ESP
+-  ↓ These functions have been merged into ESPLibrary:Add() ↓
+    - ESPLibrary.ESP.Billboard
+    - ESPLibrary.ESP.Highlight
+    - ESPLibrary.ESP.Adornment
+    - ESPLibrary.ESP.Outline
+    - ESPLibrary.ESP.Tracer
+    - ESPLibrary.ESP.Arrow
+- ESPLibrary.ESP.Clear => ESPLibrary:Clear()
+
+[ ESP Elements Changes ]
+- .Destroy() => :Destroy()
+- .SetText(), .Update() => *removed*
+- .SetVisible() => :ToggleVisibility(), :Show(), :Hide()
+```
+>>>>>>> Stashed changes
