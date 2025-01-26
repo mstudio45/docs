@@ -16,32 +16,15 @@ getgenv().mstudio45_ESP
 
 ## Changelogs
 ```diff
-[ v2.0.1 - 16.12.2024 ]
-+ Added ESPLibrary:Destroy()
-+ Fixed Billboards on AWP.GG
+[ v2.0.2 - 26.01.2025 ]
++ Added a new ESPType: `Text`
++ Added `GlobalConfig.IgnoreCharacter`, which uses the Camera instead of the `Character RootPart`
++ Improved the Player Variables updater
 
-[ v2 - 24.11.2024 ]
--- A lot has been changed in this version. --
--- Please read the documentation for more information. --
++ The `Render` function now throws errors if issues occur
++ Invisible `Tracers` and `Highlights` are now parented to a `StorageFolder` to prevent hitting the maximum render limit
 
-+ Fully rewritten library.
-+ Switched to Path2D for tracers.
-+ Huge optimizations.
-
-[ Library Changes ]
-- ESPLibrary.< Global Setting >.Set/Enable/Disable/Toggle => ESPLibrary.GlobalConfig
-- getgenv().mstudio45.ESPLibrary => getgenv().mstudio45_ESP
--  ↓ These functions have been merged into ESPLibrary:Add() ↓
-    - ESPLibrary.ESP.Billboard
-    - ESPLibrary.ESP.Highlight
-    - ESPLibrary.ESP.Adornment
-    - ESPLibrary.ESP.Outline
-    - ESPLibrary.ESP.Tracer
-    - ESPLibrary.ESP.Arrow
-- ESPLibrary.ESP.Clear => ESPLibrary:Clear()
-
-[ ESP Elements Changes ]
-- .Destroy() => :Destroy()
-- .SetText(), .Update() => *removed*
-- .SetVisible() => :ToggleVisibility(), :Show(), :Hide()
++ Fixed an typo issue with `DistanceFrom`
++ Fixed pivot fetching of the Model
++ Fixed ESPLibrary:Destroy() not disconnecting connections in Library.Connections
 ```

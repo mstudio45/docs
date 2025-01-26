@@ -16,7 +16,6 @@ title: 'Functions'
         Optional object instance for text display in ESP.
     </ParamField>
 
-    
     <ParamField path="Visible" type="boolean" default="true">
         Determines if the ESP is visible.
     </ParamField>
@@ -35,7 +34,7 @@ title: 'Functions'
     </ParamField>
 
     <ParamField path="ESPType" type="string" default="Highlight">
-        The type of ESP adornment. Types: `SphereAdornment`, `CylinderAdornment`, `Adornment`, `SelectionBox`, `Highlight`.
+        The type of ESP adornment. Types: `Text`, `SphereAdornment`, `CylinderAdornment`, `Adornment`, `SelectionBox`, `Highlight`.
     </ParamField>
 
     <ParamField path="Thickness" type="number" default="0.1">
@@ -124,6 +123,11 @@ title: 'Functions'
 ### ESP:Clear
 ```lua
 ESPLibrary:Clear() -- Clears every ESP.
+```
+
+### ESP:Destroy
+```lua
+ESPLibrary:Destroy() -- Destroys the ESP library. (You need to reload the ESP library using the loadstring after using this function)
 ```
 
 ### ESP:Add
