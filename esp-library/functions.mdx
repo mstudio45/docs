@@ -115,6 +115,15 @@ title: 'Functions'
     <ParamField path="OnDestroyFunc" type="function" default="null">
         Function executed when the ESP is destroyed.
     </ParamField>
+
+    <ParamField path="BeforeUpdate" type="function" default="null">
+        Function executed before updating all of the ESP elements (after the distance check).
+        The `ESP` table is passed as an argument to the function.
+    </ParamField>
+    <ParamField path="AfterUpdate" type="function" default="null">
+        Function executed after updating all of the ESP elements.
+        The `ESP` table is passed as an argument to the function.
+    </ParamField>
   </Accordion>
 </AccordionGroup>
 
