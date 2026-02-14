@@ -4,202 +4,396 @@ title: 'Functions'
 
 ## General Settings
 <AccordionGroup>
-  <Accordion title="ESPSettings">
-    <ParamField path="Name" type="string">
-        The name for the ESP setting.
-    </ParamField>
+    <Accordion title="ESPSettings">
+        <ParamField path="Name" type="string" required>
+            The name for the ESP setting.
+        </ParamField>
 
-    <ParamField path="Model" type="Instance" required>
-        The object instance that will be used for ESP.
-    </ParamField>
-    <ParamField path="TextModel" type="Instance">
-        Optional object instance for text display in ESP.
-    </ParamField>
+        <ParamField path="Model" type="Instance" required>
+            The object instance that will be used for ESP.
+        </ParamField>
+        <ParamField path="TextModel" type="Instance">
+            Optional object instance for text display in ESP.
+        </ParamField>
 
-    <ParamField path="Visible" type="boolean" default="true">
-        Determines if the ESP is visible.
-    </ParamField>
-    <ParamField path="Color" type="Color3" default="Color3.new()">
-        The main color for the ESP elements.
-    </ParamField>
-    <ParamField path="MaxDistance" type="number" default="5000">
-        Maximum distance at which the ESP will be displayed.
-    </ParamField>
+        <ParamField path="Visible" type="boolean" default="true">
+            Determines if the ESP is visible.
+        </ParamField>
+        <ParamField path="Color" type="Color3" default="Color3.new()">
+            The main color for the ESP instances.
+        </ParamField>
+        <ParamField path="MaxDistance" type="number" default="5000">
+            Maximum distance at which the ESP will be displayed.
+        </ParamField>
 
-    <ParamField path="StudsOffset" type="Vector3" default="Vector3.new()">
-        Offset for the ESP's position in studs.
-    </ParamField>
-    <ParamField path="TextSize" type="number" default="16">
-        Size of the text in ESP if applicable.
-    </ParamField>
+        <ParamField path="StudsOffset" type="Vector3" default="Vector3.new()">
+            Offset for the ESP's position in studs.
+        </ParamField>
+        <ParamField path="TextSize" type="number" default="16">
+            Size of the text in ESP if applicable.
+        </ParamField>
 
-    <ParamField path="ESPType" type="string" default="Highlight">
-        The type of ESP adornment. Types: `Text`, `SphereAdornment`, `CylinderAdornment`, `Adornment`, `SelectionBox`, `Highlight`.
-    </ParamField>
+        <ParamField path="ESPType" type="string" required>
+            The type of ESP adornment. Types: `Text`, `SphereAdornment`, `CylinderAdornment`, `Adornment`, `SelectionBox`, `Highlight`.
+        </ParamField>
 
-    <ParamField path="Thickness" type="number" default="0.1">
-        Thickness of the ESP element.
-    </ParamField>
-    <ParamField path="Transparency" type="number" default="0.65">
-        Transparency of the ESP element.
-    </ParamField>
+        <ParamField path="Thickness" type="number" default="0.1">
+            Thickness of the ESP instance.
+        </ParamField>
+        <ParamField path="Transparency" type="number" default="0.65">
+            Transparency of the ESP instance.
+        </ParamField>
 
-    <Accordion title="SelectionBox">
-        <Note>These settings are only for the `SelectionBox` `ESPType`.</Note>
-        <ParamField path="SurfaceColor" type="Color3" default="null">
-            The surface color of the ESP adornment.
+        <Accordion title="SelectionBox">
+            <Note>These settings are only for the `SelectionBox` `ESPType`.</Note>
+            <ParamField path="SurfaceColor" type="Color3" default="null">
+                The surface color of the ESP adornment.
+            </ParamField>
+        </Accordion>
+
+        <Accordion title="Highlight">
+            <Note>These settings are only for the `Highlight` `ESPType`.</Note>
+            
+            <ParamField path="FillColor" type="Color3" default="Color3.new()">
+                The fill color of the ESP adornment.
+            </ParamField>
+            <ParamField path="OutlineColor" type="Color3" default="Color3.new(1, 1, 1)">
+                The outline color of the ESP adornment.
+            </ParamField>
+
+            <ParamField path="FillTransparency" type="number" default="0.65">
+                The transparency of the ESP's fill.
+            </ParamField>
+            <ParamField path="OutlineTransparency" type="number" default="0">
+                The transparency of the ESP's outline.
+            </ParamField>
+        </Accordion>
+
+        <Note>All `Adornment Types` use already existing `Color` and `Transparency` setting, no need to add them again to the settings table.</Note>
+
+        <Accordion title="Tracer">
+        <ParamField path="Enabled" type="boolean" default="false">
+            Enables or disables the tracer.
+        </ParamField>
+
+        <ParamField path="Color" type="Color3" default="Color3.new()">
+            The color of the tracer line.
+        </ParamField>
+
+        <ParamField path="Thickness" type="number" default="2">
+            Thickness of the tracer line.
+        </ParamField>
+
+        <ParamField path="Transparency" type="number" default="0">
+            Transparency of the tracer line.
+        </ParamField>
+        <Warning>Transparency for tracers is opposite to Roblox.</Warning>
+
+        <ParamField path="From" type="string" default="Bottom">
+            Starting position for the tracer line. Types: `Top`, `Bottom`, `Center`, `Mouse`.
+        </ParamField>
+
+        **Example:**
+        ```lua
+        Tracer = {
+            Enabled = true,
+            Color = Color3.fromRGB(255, 100, 100),
+            Thickness = 2,
+            Transparency = 0,
+            From = "Bottom"  -- or "Top", "Center", "Mouse"
+        }
+        ```
+        </Accordion>
+
+        <Accordion title="Arrow">
+        <ParamField path="Enabled" type="boolean" default="false">
+            Enables or disables the arrow ESP.
+        </ParamField>
+
+        <ParamField path="Color" type="Color3" default="Color3.new()">
+            The color of the arrow.
+        </ParamField>
+
+        <ParamField path="CenterOffset" type="number" default="300">
+            Offset for the center position of the arrow (distance from screen center in pixels * 0.001).
+        </ParamField>
+
+        <Note>Arrow only shows when the target is off-screen.</Note>
+
+        **Example:**
+        ```lua
+        Arrow = {
+            Enabled = true,
+            Color = Color3.fromRGB(255, 100, 100),
+            CenterOffset = 300
+        }
+        ```
+        </Accordion>
+
+        <Accordion title="Box2D">
+        <ParamField path="Enabled" type="boolean" default="false">
+            Enables or disables the 2D box ESP.
+        </ParamField>
+
+        <ParamField path="Color" type="Color3" default="Color3.new()">
+            The color of the 2D box outline and fill.
+        </ParamField>
+
+        <ParamField path="Thickness" type="number" default="1">
+            Thickness of the 2D box outline.
+        </ParamField>
+
+        <ParamField path="Transparency" type="number" default="0">
+            Transparency of the 2D box outline (0 = opaque, 1 = invisible).
+        </ParamField>
+
+        <ParamField path="Filled" type="boolean" default="false">
+            If `true`, fills the 2D box with a semi-transparent background.
+        </ParamField>
+
+        <Note>Box2D creates a rectangular bounding box around the target on your screen.</Note>
+
+        **Example:**
+        ```lua
+        Box2D = {
+            Enabled = true,
+            Color = Color3.fromRGB(255, 100, 100),
+            Thickness = 2,
+            Transparency = 0,
+            Filled = true
+        }
+        ```
+        </Accordion>
+
+        <Accordion title="Box3D">
+            <ParamField path="Enabled" type="boolean" default="false">
+                Enables or disables the 3D box ESP.
+            </ParamField>
+
+            <ParamField path="Color" type="Color3" default="Color3.new()">
+                The color of the 3D box lines.
+            </ParamField>
+
+            <ParamField path="Thickness" type="number" default="1">
+                Thickness of the 3D box lines.
+            </ParamField>
+
+            <ParamField path="Transparency" type="number" default="0">
+                Transparency of the 3D box lines (0 = opaque, 1 = invisible).
+            </ParamField>
+
+            <Note>Box3D creates a 3D wireframe box showing all 8 corners of the target's bounding box.</Note>
+
+            **Example:**
+            ```lua
+            Box3D = {
+                Enabled = true,
+                Color = Color3.fromRGB(100, 255, 100),
+                Thickness = 2,
+                Transparency = 0
+            }
+            ```
+        </Accordion>
+
+        <Accordion title="Skeleton">
+            <ParamField path="Enabled" type="boolean" default="false">
+                Enables or disables the skeleton ESP.
+            </ParamField>
+
+            <ParamField path="Color" type="Color3" default="Color3.new()">
+                The color of the skeleton lines.
+            </ParamField>
+
+            <ParamField path="Thickness" type="number" default="1">
+                Thickness of the skeleton lines.
+            </ParamField>
+
+            <ParamField path="Transparency" type="number" default="0">
+                Transparency of the skeleton lines (0 = opaque, 1 = invisible).
+            </ParamField>
+
+            <Note>Skeleton ESP automatically detects R6 and R15 rig types and draws lines connecting character joints.</Note>
+
+            **Example:**
+            ```lua
+            Skeleton = {
+                Enabled = true,
+                Color = Color3.fromRGB(255, 255, 255),
+                Thickness = 1,
+                Transparency = 0
+            }
+            ```
+        </Accordion>
+
+        <ParamField path="OnDestroy" type="BindableEvent" default="null">
+            Event triggered upon destruction of the ESP.
+        </ParamField>
+
+        <ParamField path="OnDestroyFunc" type="function" default="null">
+            Function executed when the ESP is destroyed.
+        </ParamField>
+
+        <ParamField path="BeforeUpdate" type="function" default="null">
+            Function executed before updating all of the ESP instances (after the distance check).
+            The `ESP` table is passed as an argument to the function.
+        </ParamField>
+        <ParamField path="AfterUpdate" type="function" default="null">
+            Function executed after updating all of the ESP instances.
+            The `ESP` table is passed as an argument to the function.
         </ParamField>
     </Accordion>
-
-    <Accordion title="Highlight">
-        <Note>These settings are only for the `Highlight` `ESPType`.</Note>
-        
-        <ParamField path="FillColor" type="Color3" default="Color3.new()">
-            The fill color of the ESP adornment.
-        </ParamField>
-        <ParamField path="OutlineColor" type="Color3" default="Color3.new(1, 1, 1)">
-            The outline color of the ESP adornment.
-        </ParamField>
-
-        <ParamField path="FillTransparency" type="number" default="0.65">
-            The transparency of the ESP's fill.
-        </ParamField>
-        <ParamField path="OutlineTransparency" type="number" default="0">
-            The transparency of the ESP's outline.
-        </ParamField>
-    </Accordion>
-
-    <Note>All `Adornment Types` use already existing `Color` and `Transparency` setting, no need to add them again to the settings table.</Note>
-
-    <Accordion title="Tracer">
-      <ParamField path="Enabled" type="boolean" default="false">
-          Enables or disables the tracer.
-      </ParamField>
-
-      <ParamField path="Color" type="Color3" default="Color3.new()">
-          The color of the tracer line.
-      </ParamField>
-
-      <ParamField path="Thickness" type="number" default="2">
-          Thickness of the tracer line.
-      </ParamField>
-
-      <ParamField path="Transparency" type="number" default="0">
-          Transparency of the tracer line.
-      </ParamField>
-      <Warning>Transparency for tracers is opposite to Roblox.</Warning>
-
-      <ParamField path="From" type="string" default="Bottom">
-          Starting position for the tracer line. Types: `Top`, `Bottom`, `Center`, `Mouse`.
-      </ParamField>
-    </Accordion>
-
-    <Accordion title="Arrow">
-      <ParamField path="Enabled" type="boolean" default="false">
-          Enables or disables the arrow ESP.
-      </ParamField>
-
-      <ParamField path="Color" type="Color3" default="Color3.new()">
-          The color of the arrow.
-      </ParamField>
-
-      <ParamField path="CenterOffset" type="number" default="null">
-          Offset for the center position of the arrow.
-      </ParamField>
-    </Accordion>
-
-    <ParamField path="OnDestroy" type="BindableEvent" default="null">
-        Event triggered upon destruction of the ESP.
-    </ParamField>
-
-    <ParamField path="OnDestroyFunc" type="function" default="null">
-        Function executed when the ESP is destroyed.
-    </ParamField>
-
-    <ParamField path="BeforeUpdate" type="function" default="null">
-        Function executed before updating all of the ESP elements (after the distance check).
-        The `ESP` table is passed as an argument to the function.
-    </ParamField>
-    <ParamField path="AfterUpdate" type="function" default="null">
-        Function executed after updating all of the ESP elements.
-        The `ESP` table is passed as an argument to the function.
-    </ParamField>
-  </Accordion>
 </AccordionGroup>
 
-## General
+## Library Functions
 
-### ESP:Clear
+### ESPLibrary:Clear
+
+Removes all active ESP instances from the library.
+
 ```lua
-ESPLibrary:Clear() -- Clears every ESP.
+ESPLibrary:Clear()
 ```
 
-### ESP:Destroy
+---
+
+### ESPLibrary:Destroy
+
+Completely destroys the ESP library and cleans up all resources. After calling this, you must reload the library using the loadstring.
+
 ```lua
-ESPLibrary:Destroy() -- Destroys the ESP library. (You need to reload the ESP library using the loadstring after using this function)
+-- Clean up and unload the library
+ESPLibrary:Destroy()
+
+-- To use the library again, you need to reload it
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
 ```
 
-### ESP:Add
+---
+
+## Creating ESP Instance
+
+Creates a new ESP instance with the specified settings. Returns an ESP object that you can use to control the ESP.
+
 ```lua
-ESPLibrary:Add(< ESPSettings here >) -- Creates a new ESP element.
--- Look in the examples section for more information.
+local ESPInstance = ESPLibrary:Add({
+    -- ESPSettings here
+})
 ```
 
-### Response
-All ESP Functions have a same return value.
+**Example:**
+```lua
+local ESPInstance = ESPLibrary:Add({
+    Name = "Target",
+    Model = workspace.Part,
+    Color = Color3.fromRGB(255, 100, 100),
+    ESPType = "Highlight",
+    MaxDistance = 1000
+})
+```
+
+<Note>See the [Examples](/esp-library/examples) page for more detailed usage examples.</Note>
+
+## ESP Instance Functions
+
+When you create an ESP instance, it returns an object with several functions and properties:
 <AccordionGroup>
     <Accordion title="Deleted">
         <ResponseField name="Deleted" type="boolean">
-            Indicates if the ESP element is deleted.
+            Indicates if the ESP instance is deleted.
         </ResponseField>
     </Accordion>
 
     <Accordion title="Destroy">
         <ResponseField name="Destroy" type="function">
-            This function deletes the ESP element.
+            This function deletes the ESP instance.
             ```lua
-            ESPElement:Destroy()
+            ESPInstance:Destroy()
             ```
         </ResponseField>
     </Accordion>
 
     <Accordion title="Show">
         <ResponseField name="Show" type="function">
-            This function makes the ESP element visible.
+            This function makes the ESP instance visible.
             ```lua
-            ESPElement:Show()
+            ESPInstance:Show()
             ```
         </ResponseField>
     </Accordion>
 
     <Accordion title="Hide">
         <ResponseField name="Hide" type="function">
-            This function makes the ESP element invisible.
+            This function makes the ESP instance invisible.
             ```lua
-            ESPElement:Hide()
+            ESPInstance:Hide()
             ```
         </ResponseField>
     </Accordion>
 
     <Accordion title="ToggleVisibility">
         <ResponseField name="ToggleVisibility" type="function">
-            Toggles the visibility of the ESP element.
+            Toggles the visibility of the ESP instance.
             ```lua
-            ESPElement:ToggleVisibility()
+            ESPInstance:ToggleVisibility()
+            ```
+        </ResponseField>
+    </Accordion>
+
+    <Accordion title="SetEveryColor">
+        <ResponseField name="SetEveryColor" type="function">
+            Sets the color for all ESP elements at once (Main Color, Fill, Outline, etc).
+            
+            ```lua
+            ESPInstance:SetEveryColor(color, includeComponents)
+            ```
+
+            | Parameter | Type | Description |
+            | :--- | :--- | :--- |
+            | `Color` | `Color3` | The new color to apply. |
+            | `IncludeComponents` | `boolean?` | If `true`, also updates colors for components like Tracers, Boxes, etc. |
+
+            **Example:**
+            ```lua
+            -- Update only main colors (Highlight, SelectionBox, Text)
+            ESPInstance:SetEveryColor(Color3.fromRGB(255, 0, 0))
+
+            -- Update everything including tracers, arrows, boxes etc.
+            ESPInstance:SetEveryColor(Color3.fromRGB(0, 255, 0), true)
             ```
         </ResponseField>
     </Accordion>
 </AccordionGroup>
 
-### Updating current ESP
-To change any of the setting for the current ESP, edit the `CurrentSettings` table:
-<Note>Not every setting can be updated.</Note>
+### Updating ESP instance
 
+You can modify ESP settings after creation by editing the `CurrentSettings` table:
+
+<Note>Not every setting can be updated dynamically. Settings like `Model` and `ESPType` cannot be changed after creation.</Note>
+
+**Basic syntax:**
 ```lua
-ESPElement.CurrentSettings.< Setting Here > = < Value Here >
+ESPInstance.CurrentSettings.SettingName = NewValue
 ```
 
-Example:
+**Examples:**
 ```lua
-ESPElement.CurrentSettings.Name = "New Name"
+-- Change the ESP name
+ESPInstance.CurrentSettings.Name = "New Name"
+
+-- Change colors
+ESPInstance.CurrentSettings.Color = Color3.fromRGB(255, 0, 0)
+ESPInstance.CurrentSettings.FillColor = Color3.fromRGB(255, 100, 100)
+ESPInstance.CurrentSettings.OutlineColor = Color3.fromRGB(255, 255, 255)
+
+-- Change max distance
+ESPInstance.CurrentSettings.MaxDistance = 2000
+
+-- Enable/disable components
+ESPInstance.CurrentSettings.Tracer.Enabled = true
+ESPInstance.CurrentSettings.Arrow.Enabled = false
+ESPInstance.CurrentSettings.Box2D.Enabled = true
+
+-- Change component colors
+ESPInstance.CurrentSettings.Tracer.Color = Color3.fromRGB(0, 255, 0)
+ESPInstance.CurrentSettings.Box3D.Thickness = 3
 ```

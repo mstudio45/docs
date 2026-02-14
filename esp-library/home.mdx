@@ -6,32 +6,24 @@ title: 'Home'
 
 <Note>Fun Fact: This ESP Library is used inside [mspaint](https://mspaint.cc/)!</Note>
 
-## Loadstring
-```lua esp_lib.lua
+## About
+
+**mstudio45's ESP Library** is a powerful and flexible ESP library for Roblox, that is meant to work on every executor (and even inside Roblox Studio). It provides multiple visualization types including billboards, highlights, tracers, arrows and 2D/3D boxes.
+
+## Installation
+
+```lua
 local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
 
--- After the ESP Library is loaded, you can access it using the following code:
+-- You can also access the library globally:
 getgenv().mstudio45_ESP
 ```
 
-## Changelogs
-```diff
-[ v2.0.4 - 06.01.2026 ]
-+ The Arrow properly hides now after calling ESP:Hide()
+## Version
 
-[ v2.0.3 - 21.09.2025 ]
-+ Added `BeforeUpdate` and `AfterUpdate` callbacks to the ESP
-+ Improved the performance of the Render function
+Current version: **v2.1.0** (February 14, 2026) <br />
+See the [Changelogs](/esp-library/changelogs) page for version history and updates.
 
-[ v2.0.2 - 26.01.2025 ]
-+ Added a new ESPType: `Text`
-+ Added `GlobalConfig.IgnoreCharacter`, which uses the Camera instead of the `Character RootPart`
-+ Improved the Player Variables updater
+## Source Code
 
-+ The `Render` function now throws errors if issues occur
-+ Invisible `Tracers` and `Highlights` are now parented to a `StorageFolder` to prevent hitting the maximum render limit
-
-+ Fixed an typo issue with `DistanceFrom`
-+ Fixed pivot fetching of the Model
-+ Fixed ESPLibrary:Destroy() not disconnecting connections in Library.Connections
-```
+You can find the source code of the library on [GitHub](https://github.com/mstudio45/MSESP).

@@ -2,19 +2,22 @@
 title: 'Examples'
 ---
 
-```lua player_esp.lua
+## Player ESP with every component
+
+This example demonstrates a complete player ESP setup with all available components.
+
+```lua player_esp_full.lua
 local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
 local Players = game:GetService("Players")
 
--- Handler
-function playerAdded(player)
+local function playerAdded(player)
     if player == Players.LocalPlayer then return end
 
-    local ESPElement, RandomColor = nil, BrickColor.random().Color;
+    local ESPInstance, RandomColor = nil, BrickColor.random().Color;
     local function onCharAdded(character)
         character:WaitForChild("HumanoidRootPart", math.huge)
 
-        ESPElement = ESPLibrary:Add({
+        ESPInstance = ESPLibrary:Add({
             Name = player.Name,
 
             Model = character,
@@ -42,6 +45,19 @@ function playerAdded(player)
             Arrow = {
                 Enabled = true,
                 Color = RandomColor
+            },
+
+            Box2D = {
+                Enabled = true,
+                Color = RandomColor,
+                Thickness = 2,
+                Filled = false
+            },
+
+            Box3D = {
+                Enabled = true,
+                Color = RandomColor,
+                Thickness = 1.5
             }
         })
     end
@@ -50,34 +66,83 @@ function playerAdded(player)
     player.CharacterAdded:Connect(onCharAdded)
 end
 
-for _, player in pairs(Players:GetPlayers()) do playerAdded(player) end
+for _, player in Players:GetPlayers() do playerAdded(player) end
 Players.PlayerAdded:Connect(playerAdded)
 ```
+
+---
+
+## Simple Player ESP
+
+A minimal player ESP setup with just highlights and tracers.
+
+```lua player_esp_simple.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+local Players = game:GetService("Players")
+
+local function playerAdded(player)
+    if player == Players.LocalPlayer then return end
+
+    local function onCharAdded(character)
+        character:WaitForChild("HumanoidRootPart", math.huge)
+
+        ESPLibrary:Add({
+            Name = player.Name,
+            Model = character,
+            Color = Color3.fromRGB(255, 100, 100),
+            
+            ESPType = "Highlight",
+            FillColor = Color3.fromRGB(255, 100, 100),
+            OutlineColor = Color3.fromRGB(255, 255, 255),
+            
+            Tracer = { 
+                Enabled = true,
+                From = "Bottom"
+            }
+        })
+    end
+
+    onCharAdded(player.Character or player.CharacterAdded:Wait())
+    player.CharacterAdded:Connect(onCharAdded)
+end
+
+for _, player in Players:GetPlayers() do playerAdded(player) end
+Players.PlayerAdded:Connect(playerAdded)
+```
+
+---
+
+## Part ESP with 2D Boxes
+
+Track specific parts in the workspace with 2D bounding boxes.
 
 ```lua part_esp.lua
 local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
 
 local PartName = "Baseplate" -- change this to your part name
-local PartColor = BrickColor.random().Color;
+local PartColor = Color3.fromRGB(100, 255, 100)
 
--- Handler
-function partAdded(part)
+local function partAdded(part)
     if part.Name ~= PartName then return end
 
     ESPLibrary:Add({
         Name = part.Name,
-
         Model = part,
 
         Color = PartColor,
         MaxDistance = 1000,
-
         TextSize = 17,
 
         ESPType = "Highlight",
-        
         FillColor = PartColor,
         OutlineColor = PartColor,
+
+        Box2D = { 
+            Enabled = true,
+            Color = PartColor,
+            Thickness = 2,
+            Filled = true
+        },
 
         Tracer = { 
             Enabled = true,
@@ -86,6 +151,172 @@ function partAdded(part)
     })
 end
 
-for _, part in pairs(workspace:GetDescendants()) do partAdded(part) end
+for _, part in workspace:GetDescendants() do partAdded(part) end
 workspace.DescendantAdded:Connect(partAdded)
+```
+
+---
+
+## 3D Box ESP for Models
+
+Use 3D bounding boxes to visualize model boundaries.
+
+```lua model_esp_3d.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+
+local function partAdded(model)
+    if not model:IsA("Model") then return end
+
+    ESPLibrary:Add({
+        Name = model.Name,
+        Model = model,
+        
+        Color = Color3.fromRGB(255, 255, 100),
+        MaxDistance = 500,
+        
+        ESPType = "Highlight",
+        FillTransparency = 0.8,
+        OutlineTransparency = 0.3,
+        
+        Box3D = {
+            Enabled = true,
+            Color = Color3.fromRGB(255, 255, 100),
+            Thickness = 2
+        }
+    })
+end
+
+for _, part in workspace:GetChildren() do partAdded(part) end
+workspace.ChildAdded:Connect(partAdded)
+```
+
+---
+
+## Dynamic ESP (using Callbacks)
+
+Use callbacks to dynamically update ESP properties.
+
+```lua dynamic_esp.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+local Players = game:GetService("Players")
+
+local function playerAdded(player)
+    if player == Players.LocalPlayer then return end
+
+    local function onCharAdded(character)
+        character:WaitForChild("HumanoidRootPart", math.huge)
+        local humanoid = character:WaitForChild("Humanoid")
+
+        local ESP = ESPLibrary:Add({
+            Name = player.Name,
+            Model = character,
+            
+            ESPType = "Highlight",
+            
+            -- Update color based on health
+            BeforeUpdate = function(self)
+                local healthPercent = humanoid.Health / humanoid.MaxHealth
+                local color = Color3.fromRGB(
+                    255 * (1 - healthPercent),
+                    255 * healthPercent,
+                    0
+                )
+                
+                self.CurrentSettings.FillColor = color
+                self.CurrentSettings.OutlineColor = color
+                self.CurrentSettings.Color = color
+            end,
+            
+            Box2D = {
+                Enabled = true,
+                Thickness = 2
+            }
+        })
+    end
+
+    onCharAdded(player.Character or player.CharacterAdded:Wait())
+    player.CharacterAdded:Connect(onCharAdded)
+end
+
+for _, player in Players:GetPlayers() do playerAdded(player) end
+Players.PlayerAdded:Connect(playerAdded)
+```
+
+---
+
+## Rainbow ESP
+
+Enable rainbow mode for animated color effects.
+
+```lua rainbow_esp.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+local Players = game:GetService("Players")
+
+-- Enable rainbow mode globally
+ESPLibrary.GlobalConfig.Rainbow = true
+
+local function playerAdded(player)
+    if player == Players.LocalPlayer then return end
+
+    local function onCharAdded(character)
+        character:WaitForChild("HumanoidRootPart", math.huge)
+
+        ESPLibrary:Add({
+            Name = player.Name,
+            Model = character,
+            
+            ESPType = "Highlight",
+            
+            Tracer = { 
+                Enabled = true 
+            },
+
+            Arrow = { 
+                Enabled = true 
+            },
+        })
+    end
+
+    onCharAdded(player.Character or player.CharacterAdded:Wait())
+    player.CharacterAdded:Connect(onCharAdded)
+end
+
+for _, player in Players:GetPlayers() do playerAdded(player) end
+Players.PlayerAdded:Connect(playerAdded)
+```
+
+---
+
+## Skeleton ESP
+
+This example shows how to enable skeleton visualization for players.
+
+```lua skeleton_esp.lua
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/mstudio45/MSESP/refs/heads/main/source.luau"))()
+local Players = game:GetService("Players")
+
+local function playerAdded(player)
+    if player == Players.LocalPlayer then return end
+
+    local function onCharAdded(character)
+        character:WaitForChild("HumanoidRootPart", math.huge)
+
+        ESPLibrary:Add({
+            Name = player.Name,
+            Model = character,
+            
+            Skeleton = {
+                Enabled = true,
+                Color = Color3.fromRGB(255, 255, 255),
+                Thickness = 1
+            }
+        })
+    end
+
+    onCharAdded(player.Character or player.CharacterAdded:Wait())
+    player.CharacterAdded:Connect(onCharAdded)
+end
+
+for _, player in Players:GetPlayers() do playerAdded(player) end
+Players.PlayerAdded:Connect(playerAdded)
 ```

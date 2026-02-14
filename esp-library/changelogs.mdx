@@ -1,0 +1,106 @@
+---
+title: 'Changelogs'
+---
+
+## Version History
+
+### v2.1.0 - 14.02.2026
+
+#### New Features
+- Added `ESPInstance:SetEveryColor(Color, IncludeComponents)` to quickly update all colors at once
+- **Box2D Component**: Added 2D bounding box ESP
+  ```lua
+  Box2D = {
+      Enabled = true,
+      Color = Color3.new(1, 1, 1),
+      Thickness = 1,
+      Transparency = 0,
+      Filled = false
+  }
+  ```
+- **Box3D Component**: Added 3D bounding box ESP
+  ```lua
+  Box3D = {
+      Enabled = true,
+      Color = Color3.new(1, 1, 1),
+      Thickness = 1,
+      Transparency = 0
+  }
+  ```
+- **Skeleton Component**: Added Skeleton ESP (automatically detects R6 and R15, also works on NPCs)
+  ```lua
+  Skeleton = {
+      Enabled = true,
+      Color = Color3.new(1, 1, 1),
+      Thickness = 1,
+      Transparency = 0
+  }
+  ```
+- Added `Box2D`, `Box3D`, `Skeleton` to `ESPLibrary.GlobalConfig`
+
+#### Improvements
+- Improved error handling in component update cycles (enable `getgenv().mstudio45_ESP_DEBUG` to see the error messages)
+- `Model`, `TextModel`, `ESPType` are now read-only options (cannot be changed on already existing ESP instances)
+
+#### Changes
+- Each component was recoded to its own function for code readability and scalability
+- Removed v1 source code from the repository (`source.lua`)
+
+---
+
+### v2.0.4 - 06.01.2026
+
+#### Bug Fixes
+- Fixed Arrow component not properly hiding after calling `ESP:Hide()`
+
+---
+
+### v2.0.3 - 21.09.2025
+
+#### New Features
+- Added `BeforeUpdate` callback - executes before updating ESP components (after distance check)
+  ```lua
+  BeforeUpdate = function(self)
+      -- Your code here, runs before component updates
+      print("Updating ESP:", self.CurrentSettings.Name)
+  end
+  ```
+
+- Added `AfterUpdate` callback - executes after updating all ESP components
+  ```lua
+  AfterUpdate = function(self)
+      -- Your code here, runs after component updates
+  end
+  ```
+
+#### Improvements
+- Improved performance of the Render function
+
+---
+
+### v2.0.2 - 26.01.2025
+
+#### New Features
+- Added new ESPType: `Text` for text-only ESP displays
+  ```lua
+  ESPType = "Text"
+  ```
+
+- Added `GlobalConfig.IgnoreCharacter` option
+  - When enabled, it uses Camera position instead of Character RootPart for calculations
+  - Useful for spectator modes or camera-based games
+  ```lua
+  ESPLibrary.GlobalConfig.IgnoreCharacter = true
+  ```
+
+#### Improvements
+- Improved Player Variables updater for better character tracking
+- Render function now properly throws errors when issues occur for easier debugging
+- Invisible `Tracers` and `Highlights` are now parented to `StorageFolder` to prevent hitting maximum render limits
+- Improved memory management and performance
+
+#### Bug Fixes
+- Fixed typo issue with `DistanceFrom` function
+- Fixed pivot fetching of Models
+- Fixed `ESPLibrary:Destroy()` not properly disconnecting connections in `Library.Connections`
+- Improved cleanup on ESP destruction

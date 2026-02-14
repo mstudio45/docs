@@ -30,7 +30,8 @@
         "esp-library/home",
         "esp-library/functions",
         "esp-library/global-config",
-        "esp-library/examples"
+        "esp-library/examples",
+        "esp-library/changelogs"
       ]
     }
   ],

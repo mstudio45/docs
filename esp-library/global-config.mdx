@@ -2,48 +2,82 @@
 title: 'Global Config'
 ---
 
+The `GlobalConfig` table allows you to control ESP behavior globally across all ESP instances.
+
+## Configuration Options
+
 <AccordionGroup>
   <Accordion title="ESPLibrary.GlobalConfig">
     <ParamField path="IgnoreCharacter" type="boolean" default="false">
-        If `true`, the ESP will use calculations from the Camera instead of the Character RootPart.
+        When enabled, ESP calculations use the Camera position instead of the Character's RootPart. Useful for spectator modes or camera-based games.
     </ParamField>
 
     <ParamField path="Rainbow" type="boolean" default="false">
-        If `true`, the rainbow effect will be enabled.
-    </ParamField>
-
-    <ParamField path="Billboards" type="boolean" default="true">
-        If `true`, the billboards will be enabled.
-    </ParamField>
-
-    <ParamField path="Distance" type="boolean" default="true">
-        If `true`, the distance text in billboards will be enabled.
-    </ParamField>
-
-    <ParamField path="Highlighters" type="boolean" default="true">
-        If `true`, the highlighters will be enabled.
-    </ParamField>
-
-    <ParamField path="Tracers" type="boolean"  default="true">
-        If `true`, the tracer will be enabled.
-    </ParamField>
-
-    <ParamField path="Arrows" type="boolean"  default="true">
-        If `true`, the arrow will be enabled.
+        Enables animated rainbow color effects for all ESP instances.
     </ParamField>
 
     <ParamField path="Font" type="Enum.Font" default="Enum.Font.RobotoCondensed">
-        The font used for the text in the billboards.
+        The font used for billboard text labels.
+    </ParamField>
+
+    <ParamField path="Billboards" type="boolean" default="true">
+        Globally enables or disables all billboard labels.
+    </ParamField>
+
+    <ParamField path="Distance" type="boolean" default="true">
+        Shows or hides distance text in billboard labels.
+    </ParamField>
+
+    <ParamField path="Highlighters" type="boolean" default="true">
+        Globally enables or disables all highlighter components.
+    </ParamField>
+
+    <ParamField path="Tracers" type="boolean"  default="true">
+        Globally enables or disables all tracer components.
+    </ParamField>
+
+    <ParamField path="Arrows" type="boolean"  default="true">
+        Globally enables or disables all arrow components.
+    </ParamField>
+
+    <ParamField path="Boxes2D" type="boolean"  default="true">
+        Globally enables or disables all 2D box components.
+    </ParamField>
+
+    <ParamField path="Boxes3D" type="boolean"  default="true">
+        Globally enables or disables all 3D box components.
+    </ParamField>
+
+    <ParamField path="Skeleton" type="boolean"  default="true">
+        Globally enables or disables all skeleton components.
     </ParamField>
   </Accordion>
 </AccordionGroup>
 
-To change any of the setting in the `ESPLibrary.GlobalConfig` table, use the following function:
+## Usage
+
+**Basic syntax:**
 ```lua
-ESPLibrary.GlobalConfig.< Setting Here > = < Value Here >
+ESPLibrary.GlobalConfig.SettingName = value
 ```
 
-Example:
+**Examples:**
+
 ```lua
+-- Enable rainbow mode
 ESPLibrary.GlobalConfig.Rainbow = true
+
+-- Disable all tracers globally
+ESPLibrary.GlobalConfig.Tracers = false
+
+-- Hide distance text in billboards
+ESPLibrary.GlobalConfig.Distance = false
+
+-- Use camera instead of character for calculations
+ESPLibrary.GlobalConfig.IgnoreCharacter = true
+
+-- Change billboard font
+ESPLibrary.GlobalConfig.Font = Enum.Font.GothamBold
 ```
+
+<Note>Global config changes apply to all existing and future ESP instances.</Note>
